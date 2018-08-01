@@ -27,6 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/").permitAll()
 			.antMatchers("/url-magica-maluca-oajksfbvad6584i57j54f9684nvi658efnoewfmnvowefnoeijn").permitAll()
 			.antMatchers("/relatorio-produtos").permitAll()
+			.antMatchers("/pedidos").hasRole("ADMIN")
 			.anyRequest().authenticated()
 			.and()
 				.formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
