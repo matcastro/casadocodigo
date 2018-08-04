@@ -32,7 +32,7 @@ public class UsuarioDAO implements UserDetailsService{
 	}
 	
 	public List<Usuario> listar() {
-		return manager.createQuery("select p from Usuario p", Usuario.class)
+		return manager.createQuery("select u from Usuario u", Usuario.class)
 				.getResultList();
 	}
 
@@ -40,6 +40,10 @@ public class UsuarioDAO implements UserDetailsService{
 		manager.persist(usuario);
 	}
 
+	public void atualizar(Usuario usuario) {
+		manager.merge(usuario);
+	}
+	
 	public boolean checkNewUser(String email) {
 		List<Usuario> usuarios = manager.createQuery("select u from Usuario u where email = :email", Usuario.class)
 				.setParameter("email", email)
@@ -48,5 +52,10 @@ public class UsuarioDAO implements UserDetailsService{
 			return true;
 		}
 		return false;
+	}
+	
+	public List<Usuario> listarUsuariosComRoles(){
+		return manager.createQuery("select distinct(u) from Usuario u left join u.roles roles" , Usuario.class)
+				.getResultList();
 	}
 }
