@@ -8,10 +8,12 @@ import javax.persistence.PersistenceContext;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.casadocodigo.loja.models.Usuario;
 
 @Repository
+@Transactional
 public class UsuarioDAO implements UserDetailsService{
 
 	@PersistenceContext
@@ -28,8 +30,23 @@ public class UsuarioDAO implements UserDetailsService{
 		
 		return usuarios.get(0);
 	}
+	
+	public List<Usuario> listar() {
+		return manager.createQuery("select p from Usuario p", Usuario.class)
+				.getResultList();
+	}
 
 	public void gravar(Usuario usuario) {
 		manager.persist(usuario);
+	}
+
+	public boolean checkNewUser(String email) {
+		List<Usuario> usuarios = manager.createQuery("select u from Usuario u where email = :email", Usuario.class)
+				.setParameter("email", email)
+				.getResultList();
+		if(usuarios.size() < 1) {
+			return true;
+		}
+		return false;
 	}
 }
