@@ -13,11 +13,14 @@
 	<section class="container middle">
 		<a href="${s:mvcUrl('UC#form').build() }"><fmt:message key="lista.usuarios.novo"/></a>
 		<h2 id="cart-title"><fmt:message key="lista.usuarios"/></h2>
+		<p>${message }</p>
 		<table id="cart-table">
 			<thead>
 				<tr>
 					<th><fmt:message key="cadastro.usuarios.nome"/></th>
 					<th><fmt:message key="cadastro.usuarios.email"/></th>
+					<th>Roles</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -25,6 +28,13 @@
 					<tr>
 						<td>${usuario.nome}</td>
 						<td>${usuario.email}</td>
+						<td>${usuario.roles}</td>
+						<td>
+							<form:form action="${s:mvcUrl('UC#permissoes').arg(0, usuario.email).build() }">
+								<input type="image" src="${contextPath }resources/imagens/adicionar.png" 
+										alt="Adicionar" title="Adicionar" />
+							</form:form>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
