@@ -44,7 +44,7 @@ public class UsuarioDAO implements UserDetailsService{
 		List<Usuario> usuarios = manager.createQuery("select u from Usuario u where email = :email", Usuario.class)
 				.setParameter("email", email)
 				.getResultList();
-		if(usuarios.size() < 1) {
+		if(usuarios.isEmpty()) {
 			return true;
 		}
 		return false;
