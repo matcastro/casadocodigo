@@ -19,6 +19,7 @@ public class PedidosServicoController {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView getPedidos() {
 		ModelAndView modelAndView = new ModelAndView("pedidos");

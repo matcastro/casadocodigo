@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:url value="/" var="contextPath" />
 
@@ -10,14 +11,14 @@
 
 <jsp:body>
 	<section class="container middle">
-		<h2 id="cart-title">Lista de Pedidos Atuais</h2>
+		<h2 id="cart-title"><fmt:message key="pedidos.lista"/></h2>
 		<table id="cart-table">
 			<thead>
 				<tr>
-					<th>ID</th>
-					<th>Valor</th>
-					<th>Data Pedido</th>
-					<th>Títulos</th>
+					<th><fmt:message key="pedidos.id"/></th>
+					<th><fmt:message key="pedidos.valor"/></th>
+					<th><fmt:message key="pedidos.data.pedido"/></th>
+					<th><fmt:message key="pedidos.titulos"/></th>
 				</tr>
 			</thead>
 			<tbody>
